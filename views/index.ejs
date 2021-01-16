@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Test</h1>
+
+    <input type="file" name="image" id="image" onchange="fileHandler()" />
+
+    <form method="post" action="/upload">
+        <input type="hidden" name="file" id="file" />
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        const toBase64 = (file) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                document.getElementById("file").value = reader.result;
+            }
+            reader.onerror = (error) => console.log(error)
+        }
+        const fileHandler =  () => {
+            const file = document.querySelector("#image").files[0]
+            const file_data = toBase64(file)
+
+        }
+    </script>
+</body>
+</html>
